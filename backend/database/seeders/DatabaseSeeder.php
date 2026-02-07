@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +12,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        // Create or update the Police account (prevents duplicate entries)
+        User::updateOrCreate(
+            ['email' => 'mishrapradip@gmail.com'],
+            [
+                'name'   => 'Officer Pradip',
+                'mobile' => '9847521661',
+                'role'   => 'police', // Critical for Police Dashboard access
+            ]
+        );
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // Create or update the Admin account
+        User::updateOrCreate(
+            ['email' => 'admin@gmail.com'],
+            [
+                'name'   => 'System Admin',
+                'mobile' => '0181234567',
+                'role'   => 'admin', // Critical for Admin Dashboard access
+            ]
+        );
     }
 }

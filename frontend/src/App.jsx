@@ -1,5 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
+import Index from './components/Index';
 import Login from './components/Login';
+
 
 // --- Dashboard Components ---
 // These are placeholder components for different user roles. 
@@ -16,11 +18,9 @@ function App() {
       */}
       <Routes>
         
-        {/* Root Route: 
-            The '/' path is the entry point of your app. 
-            It defaults to showing the Login page.
-        */}
-        <Route path="/" element={<Login />} /> 
+     
+        <Route path="/" element={<Index/>} />
+        <Route path="/login" element={<Login />} /> 
         
         {/* Role-Based Redirection Targets:
             After a successful OTP verification, the user is redirected 

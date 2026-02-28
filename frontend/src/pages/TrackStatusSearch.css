@@ -1,0 +1,118 @@
+.search-page-bg {
+    min-height: 100vh;
+    background-color: #f1f5f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.search-portal-container {
+    width: 100%;
+    max-width: 850px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Banner Styling */
+.search-banner {
+    background: linear-gradient(135deg, #3b82f6 0%, #2dd4bf 100%);
+    padding: 70px 40px;
+    border-radius: 28px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.25);
+    margin-bottom: -50px; /* Overlap effect */
+    position: relative;
+    z-index: 1;
+}
+
+.icon-circle {
+    margin-bottom: 24px;
+    display: inline-block;
+}
+
+.search-banner h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.search-banner p {
+    font-size: 1.15rem;
+    opacity: 0.9;
+}
+
+/* Card Styling */
+.search-card-wrapper {
+    background: white;
+    padding: 80px 50px 40px;
+    border-radius: 28px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
+}
+
+.input-group label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 15px;
+}
+
+.blue-icon { color: #2563eb; }
+
+.search-card input {
+    width: 100%;
+    padding: 20px 24px;
+    border: 2px solid #e2e8f0;
+    border-radius: 14px;
+    font-size: 1.2rem;
+    background: #f8fafc;
+    transition: 0.3s;
+    outline: none;
+    box-sizing: border-box;
+    margin-bottom: 25px;
+}
+
+.search-card input:focus {
+    border-color: #2563eb;
+    background: white;
+    box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.1);
+}
+
+.search-submit-btn {
+    width: 100%;
+    background-color: #2563eb;
+    color: white;
+    padding: 20px;
+    border: none;
+    border-radius: 14px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: 0.3s;
+}
+
+.search-submit-btn:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 15px 25px -5px rgba(37, 99, 235, 0.3);
+}
+
+.back-to-dash {
+    background: none; border: none; color: #94a3b8;
+    margin: 25px auto 0; display: flex; align-items: center;
+    gap: 8px; font-weight: 600; cursor: pointer; transition: 0.2s;
+}
+
+.back-to-dash:hover { color: #2563eb; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

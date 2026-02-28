@@ -4,36 +4,65 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\OtpController;
+use App\Http\Controllers\ComplaintController;
+use App\Http\Controllers\DropdownController;
+
 /*
 |--------------------------------------------------------------------------
-| API Routes
+| Public Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
 */
-Route::middleware('auth:sanctum')->group(function () {
+
+Route::post('/send-otp', [OtpController::class, 'sendOtp']);
+Route::post('/verify-otp', [OtpController::class, 'verifyOtp']);
+
+Route::get('/police-unit-types', [DropdownController::class, 'unitTypes']);
+Route::get('/police-units/{type}', [DropdownController::class, 'unitsByType']);
+Route::get('/police-stations/{unitId}', [DropdownController::class, 'policeStations']);
+Route::get('/complaint-types', [DropdownController::class, 'complaintTypes']);
+
+/*
+|--------------------------------------------------------------------------
+| Protected Routes (Login Required)
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware(['auth:sanctum'])->group(function () {
 
     // Logged-in user info
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
 
-    // Admin Route
-    Route::middleware('role:admin')->get('/admin-dashboard', [AdminController::class,'index']);
+    //  Complaint Routes
+    Route::post('/complaint', [ComplaintController::class, 'store']);
+    Route::get('/my-complaints', [ComplaintController::class, 'myComplaints']);
 
-    // Police Route
-    Route::middleware('role:police')->get('/police-dashboard', function () {
-        return "Police Dashboard";
+
+    // Add This For Track Status
+    Route::get('/complaint/{id}', [ComplaintController::class, 'show']);
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Role Based Routes
+    |--------------------------------------------------------------------------
+    */
+
+    Route::middleware('role:admin')->group(function () {
+        Route::get('/admin-dashboard', [AdminController::class, 'index']);
     });
 
-    // Citizen Route
-    Route::middleware('role:citizen')->get('/citizen-dashboard', function () {
-        return "Citizen Dashboard";
+    Route::middleware('role:police')->group(function () {
+        Route::get('/police-dashboard', function () {
+            return response()->json(['message' => 'Police Dashboard']);
+        });
     });
+
+    Route::middleware('role:citizen')->group(function () {
+        Route::get('/citizen-dashboard', function () {
+            return response()->json(['message' => 'Citizen Dashboard']);
+        });
+    });
+
 });
-
-Route::post('/send-otp', [OtpController::class, 'sendOtp']);
-Route::post('/verify-otp', [OtpController::class, 'verifyOtp']);

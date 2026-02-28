@@ -77,6 +77,8 @@ class OtpController extends Controller
                 'role'   => $existingUser ? $existingUser->role : 'citizen',
             ]
         );
+        
+        $user->tokens()->delete();
 
         // Generate API token
         $token = $user->createToken('auth_token')->plainTextToken;
